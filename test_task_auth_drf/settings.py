@@ -31,7 +31,6 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 SITE_ID = 1
-
 AUTHENTICATION_BACKENDS = [
     # Needed to login by username in Django admin, regardless of `allauth`
     'django.contrib.auth.backends.ModelBackend',
@@ -53,6 +52,7 @@ INSTALLED_APPS = [
     'auth_app.apps.AuthAppConfig',
     'rest_framework',
     'rest_framework_simplejwt',
+    'rest_framework.authtoken',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -92,14 +92,13 @@ TEMPLATES = [
 
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
-        # For each OAuth based provider, either add a ``SocialApp``
-        # (``socialaccount`` app) containing the required client
-        # credentials, or list them here:
-        "APP": {
-            "client_id": "GOOGLE_CLIENT_ID",
-            "secret": "GOOGLE_SECRET_KEY",
-            "key": ""
-        },
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        }
     }
 }
 
