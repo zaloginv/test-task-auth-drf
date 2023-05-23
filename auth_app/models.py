@@ -3,7 +3,6 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser, BaseUserManager, PermissionsMixin
 
 
-
 class UserManager(BaseUserManager):
 
     def create_user(self, username, password=None):
@@ -31,7 +30,5 @@ class User(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(db_index=True, max_length=255, unique=True)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
-    access = models.CharField(max_length=255, null=True, blank=True)
-    refresh = models.CharField(max_length=255, null=True, blank=True)
     USERNAME_FIELD = "username"
     objects = UserManager()
