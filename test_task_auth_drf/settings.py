@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
+    'dj_rest_auth'
 
 ]
 
@@ -92,6 +93,11 @@ TEMPLATES = [
 
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
+        "APP": {
+            "client_id": "1070027013119-pojd228dhkq02ek9iv5ev70bea2qfngm.apps.googleusercontent.com",  # replace me
+            "secret": "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",  # replace me
+            "key": "",
+        },
         'SCOPE': [
             'profile',
             'email',
@@ -162,6 +168,7 @@ AUTH_USER_MODEL = 'auth_app.User'
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'dj_rest_auth.jwt_auth.JWTCookieAuthentication',
     ]
 }
 
@@ -204,6 +211,10 @@ SIMPLE_JWT = {
     "TOKEN_BLACKLIST_SERIALIZER": "rest_framework_simplejwt.serializers.TokenBlacklistSerializer",
     "SLIDING_TOKEN_OBTAIN_SERIALIZER": "rest_framework_simplejwt.serializers.TokenObtainSlidingSerializer",
     "SLIDING_TOKEN_REFRESH_SERIALIZER": "rest_framework_simplejwt.serializers.TokenRefreshSlidingSerializer",
+}
+
+REST_AUTH = {
+    'USE_JWT': True,
 }
 
 SOCIALACCOUNT_STORE_TOKENS = True
